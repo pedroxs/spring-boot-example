@@ -10,7 +10,7 @@ Future implementations:
    * MongoDB
 
 
-To use war package change pom.xml
+To use war package change pom.xml  
 From: `<packaging>jar</packaging>`
 To: `<packaging>war</packaging>`
 
