@@ -11,11 +11,7 @@ Future implementations:
 
 
 To use war package change pom.xml
-
-From:
-   <packaging>jar</packaging>
-
-To:
-   <packaging>war</packaging>
+From: `<packaging>jar</packaging>`
+To: `<packaging>war</packaging>`
 
 And run with embedded Jetty `mvn jetty:run`
