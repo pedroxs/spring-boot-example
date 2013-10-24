@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <title>Products : Create</title>
+</head>
+<body>
+<h1 layout:fragment="header">Products : Create</h1>
+
+<div layout:fragment="content"
+     class="container">
+    <form id="productForm"
+          th:action="@{/products(form)}"
+          th:object="${product}"
+          action="#"
+          enctype="multipart/form-data"
+          method="post" accept-charset="UTF-8">
+        <div th:if="${#fields.hasErrors('*')}"
+             class="alert alert-error">
+            <p th:each="error : ${#fields.errors('*')}"
+               th:text="${error}">
+                Validation error
+            </p>
+        </div>
+        <div class="pull-right">
+            <a th:href="@{/products}" href="products.html"> Products </a>
+        </div>
+        <label>Name</label>
+        <input type="text"
+               th:field="*{name}"
+               th:class="${#fields.hasErrors('name')} ? 'field-error'"/>
+        <label>Price</label>
+        <input type="text"
+               th:field="*{price}"
+               th:class="${#fields.hasErrors('price')} ? 'field-error'"/>
+        <label>Stock</label>
+        <input type="text"
+                th:field="*{stock}"
+                th:class="${#fields.hasErrors('stock')} ? 'field-error'"/>
+        <label>Description</label>
+        <input type="text"
+               th:field="*{description}"
+               th:class="${#fields.hasErrors('description')} ? 'field-error'"/>
+        <label>Photo</label>
+        <input type="file"
+               th:field="*{multipartFile}"
+               th:class="${#fields.hasErrors('multipartFile')} ? 'field-error'"/>
+        <div class="form-actions">
+            <input type="submit" value="Create"/>
+        </div>
+    </form>
+</div>
+</body>
+</html>

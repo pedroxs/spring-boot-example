@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <title>Products : View all</title>
+</head>
+<body>
+<h1 layout:fragment="header">Products : View all</h1>
+<div layout:fragment="content" class="container">
+    <div class="alert alert-info"
+         th:if="${globalMessage}"
+         th:text="${globalMessage}">
+        Some Success message
+    </div>
+    <div class="pull-right">
+        <a href="form.html" th:href="@{/products(form)}">Create product</a>
+    </div>
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <td>ID</td>
+            <td>Name</td>
+            <td>Price</td>
+            <td>Description</td>
+            <td>Remove</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${products.empty}">
+            <td colspan="5">
+                No products
+            </td>
+        </tr>
+        <tr th:each="product : ${products}">
+            <td th:text="${product.id}">1</td>
+            <td th:text="${product.name}">Shoes</td>
+            <td th:text="${#numbers.formatDecimal(product.price, 1, 2)}">1,99</td>
+            <td>
+                <a href="view.html"
+                   th:href="@{'/products/' + ${product.id}}"
+                   th:text="${product.description}">
+                    Description
+                </a>
+            </td>
+            <td><p style="margin: auto; width: 15px;">
+                <a style="font-size: 30px; color: red;"
+                   href="#" th:href="@{'/products/' + ${product.id} + '/remove'}" class="close">&times;</a>
+            </p></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

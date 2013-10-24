@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <title>Products : View all</title>
+</head>
+<body>
+<h1 layout:fragment="header">Products : View all</h1>
+<div layout:fragment="content" class="container">
+    <table id="products" class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <td>Photo</td>
+            <td>Name</td>
+            <td>Price</td>
+            <!--<td>Description</td>
+            <td>Action</td>-->
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${products.empty}">
+            <td colspan="3">
+                No products
+            </td>
+        </tr>
+        <tr th:each="product : ${products}" th:id="${product.id}" style="cursor: pointer;">
+            <td>
+                <img src="https://www.google.com/images/srpr/logo11w.png" alt="image"
+                     style="height: 60px;" class="img-rounded"
+                     th:src="${product.photo} ? @{'data:image/jpeg;base64,'+${product.getPhotoBase64()}} :
+                             @{/image/image_not_available.jpg}"/>
+            </td>
+            <td th:text="${product.name}">Shoes</td>
+            <td th:text="${#numbers.formatDecimal(product.price, 1, 2)}">1,99</td>
+            <!--<td th:text="${product.description}">Description</td>
+            <td>
+                <div class="form-inline">
+                    <input type="number" style="width: 35px;"/>
+                    <button th:id="${product.id}" class="buy btn btn-primary">Buy</button>
+                </div>
+            </td>-->
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
